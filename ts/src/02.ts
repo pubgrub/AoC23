@@ -28,9 +28,7 @@ let resultPart1 = 0
 let resultPart2 = 0
 
 for (let line of inputLines) {
-  if (line.length === 0) {
-    continue
-  }
+  if (line.length === 0) continue
   const maxNum: Record<string, number> = {}
   line = line + ';'
   const gameMatch = line.match(gameRegex)

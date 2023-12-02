@@ -55,7 +55,7 @@ const replacements: Record<string, string> = {
 }
 
 const wordRegex = new RegExp('^(' + Object.keys(replacements).join('|') + ')')
-const digitRegex = /'^(\\d)'/
+const digitRegex = /^(\d)/
 
 if (!test || testPart2) {
   sum = 0
@@ -66,12 +66,12 @@ if (!test || testPart2) {
     if (s.length === 0) continue
     for (let start = 0; start < s.length; start++) {
       const substr = s.substring(start)
-      let match = digitRegex.exec(substr)
+      let match = substr.match(digitRegex)
       if (match != null) {
         if (firstNum === '0') {
-          firstNum = match[0]
+          firstNum = match[1]
         }
-        lastNum = match[0]
+        lastNum = match[1]
         continue
       }
       match = wordRegex.exec(substr)
