@@ -9,10 +9,8 @@ const test: boolean = false
 // const testPart1: boolean = true
 // const testPart2: boolean = true
 
-const testDataFile = '../testdata/' + day + '.txt'
-const dataFile = '../data/' + day + '.txt'
-
-let inputLines = readFileSync(test ? testDataFile : dataFile).toString().split('\n')
+const fileName = test ? `../testdata/${day}.txt`: `../data/${day}.txt`
+let inputLines = readFileSync(fileName).toString().split('\n')
 inputLines = inputLines.map(str => (str.trim()))
 
 const lineRegex = /Card\s+(\d+):(.*)\|\s+(.*)/
