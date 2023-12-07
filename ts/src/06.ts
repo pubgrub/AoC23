@@ -17,7 +17,7 @@ const inputRegex = /(\d+)/g
 
 const timesStrings = inputLines[0].match(inputRegex)
 const distStrings = inputLines[1].match(inputRegex)
-if (distStrings === null || timesStrings === null) { console.log('Problems parsing'); process.exit(1) }
+if (distStrings === null || timesStrings === null ) { console.log('Problems parsing'); process.exit(1)}
 timesStrings.push(timesStrings.join(''))
 distStrings.push(distStrings.join(''))
 const dist = distStrings.map(a => Number(a))
