@@ -17,23 +17,19 @@ const inChar =
   [['2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A'],
     ['J', '2', '3', '4', '5', '6', '7', '8', '9', 'T', 'Q', 'K', 'A']]
 
-const inRegex = /^([0-9TJQKA]+).*?(\d+)/
-
 for (const part of [1, 2]) {
   const gameCodes: Record< string, number> = {}
   inputLines.forEach((l, idx) => {
     if (l.length === 0) return
-    const game = l.match(inRegex)
+    const game = l.match(/^([0-9TJQKA]+).*?(\d+)/)
     if (game === null) { console.error('game match did not match'); process.exit(1) }
-    const origCardsStr = game[1]
-    const gameBid = Number(game[2])
 
     let cards = ((str: string) => {
       return [...str].map(c => {
         const index = inChar[part - 1].indexOf(c)
         return index >= 0 ? String.fromCharCode(index + 65) : c
       }).join('')
-    })(origCardsStr)
+    })(game[1])
 
     let nJokers = 0
     const origcards = cards
@@ -54,11 +50,11 @@ for (const part of [1, 2]) {
     if (part === 2) {
       gameType = String(Number(gameType) + nJokers * 10000)
     }
-    gameCodes[gameType + origcards] = gameBid
+    gameCodes[gameType + origcards] = Number(game[2])
   })
   let winnings = 0
   Object.keys(gameCodes).sort().forEach((key, idx) => {
     winnings += (idx + 1) * gameCodes[key]
   })
-  console.log(winnings)
+  console.log(`Result Part ${part}: ` + winnings)
 }

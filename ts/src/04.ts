@@ -9,7 +9,7 @@ const test: boolean = false
 // const testPart1: boolean = true
 // const testPart2: boolean = true
 
-const fileName = test ? `../testdata/${day}.txt`: `../data/${day}.txt`
+const fileName = test ? `../testdata/${day}.txt` : `../data/${day}.txt`
 let inputLines = readFileSync(fileName).toString().split('\n')
 inputLines = inputLines.map(str => (str.trim()))
 
