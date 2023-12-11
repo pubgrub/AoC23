@@ -29,8 +29,9 @@ inputLines.forEach((l) => {
 console.log('Result Task 1: ', result1);
 console.log('Result Task 2: ', result2);
 function solve(numbers) {
-    const zeros = numbers.reduce((count, a) => { return (a === 0 ? count + 1 : count); }, 0);
-    if (zeros === numbers.length)
+    if (numbers.length === numbers.reduce((count, a) => {
+        return (a === 0 ? count + 1 : count);
+    }, 0))
         return [0, 0];
     const summands = [];
     for (let n = 0; n < numbers.length - 1; n++) {

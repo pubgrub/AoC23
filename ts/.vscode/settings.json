@@ -8,6 +8,8 @@
   "vs-code-prettier-eslint.prettierLast": true, // set as "true" to run 'prettier' last not first
   "eslint.rules.customizations": [
     { "rule": "*", "severity": "warn" }
-  ]
-
+  ],
+  "editor.codeActionsOnSave":  {
+    "source.fixAll.eslint": "explicit"
+  }
 }

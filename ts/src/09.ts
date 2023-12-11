@@ -29,8 +29,9 @@ console.log('Result Task 1: ', result1)
 console.log('Result Task 2: ', result2)
 
 function solve (numbers: number[]): [number, number] {
-  const zeros = numbers.reduce((count, a) => { return (a === 0 ? count + 1 : count) }, 0)
-  if (zeros === numbers.length) return [0, 0]
+  if (numbers.length === numbers.reduce((count, a) => {
+    return (a === 0 ? count + 1 : count)
+  }, 0)) return [0, 0]
   const summands: number[] = []
   for (let n = 0; n < numbers.length - 1; n++) {
     summands.push(numbers[n + 1] - numbers[n])
