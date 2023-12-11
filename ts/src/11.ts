@@ -6,8 +6,6 @@ Day 11
 
 const day = '11'
 const test: boolean = false
-// const testPart1: boolean = true
-// const testPart2: boolean = true
 
 const fileName = test ? `../testdata/${day}.txt` : `../data/${day}.txt`
 let inputLines = readFileSync(fileName).toString().split('\n')
@@ -16,24 +14,21 @@ inputLines = inputLines.map(str => (str.trim()))
 // find empty lines/cols
 const emptyLines: number[] = []
 const colHasGalaxy: number[] = []
+const galaxies: Array<[number, number]> = []
 inputLines.forEach((line, lIdx) => {
   if (!line.includes('#')) emptyLines.push(lIdx);
   [...line].forEach((c, cIdx) => {
     if (c === '#') colHasGalaxy.push(cIdx)
   })
+  for (const m of line.matchAll(/#/g)) {
+    if (m.index !== undefined) galaxies.push([m.index, lIdx])
+  }
 })
 
 const emptyCols: number[] = []
 for (let i = 0; i < inputLines[0].length; i++) {
   if (!colHasGalaxy.includes(i)) emptyCols.push(i)
 }
-
-const galaxies: Array<[number, number]> = []
-inputLines.forEach((l, lIdx) => {
-  for (const m of l.matchAll(/#/g)) {
-    if (m.index !== undefined) galaxies.push([m.index, lIdx])
-  }
-})
 
 console.log('Result Part 1: ', calcDistances(galaxies, 1))
 console.log('Result Part 2: ', calcDistances(galaxies, 999999))

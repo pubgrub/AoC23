@@ -6,14 +6,13 @@ Day 11
 */
 const day = '11';
 const test = false;
-// const testPart1: boolean = true
-// const testPart2: boolean = true
 const fileName = test ? `../testdata/${day}.txt` : `../data/${day}.txt`;
 let inputLines = (0, fs_1.readFileSync)(fileName).toString().split('\n');
 inputLines = inputLines.map(str => (str.trim()));
 // find empty lines/cols
 const emptyLines = [];
 const colHasGalaxy = [];
+const galaxies = [];
 inputLines.forEach((line, lIdx) => {
     if (!line.includes('#'))
         emptyLines.push(lIdx);
@@ -21,19 +20,16 @@ inputLines.forEach((line, lIdx) => {
         if (c === '#')
             colHasGalaxy.push(cIdx);
     });
+    for (const m of line.matchAll(/#/g)) {
+        if (m.index !== undefined)
+            galaxies.push([m.index, lIdx]);
+    }
 });
 const emptyCols = [];
 for (let i = 0; i < inputLines[0].length; i++) {
     if (!colHasGalaxy.includes(i))
         emptyCols.push(i);
 }
-const galaxies = [];
-inputLines.forEach((l, lIdx) => {
-    for (const m of l.matchAll(/#/g)) {
-        if (m.index !== undefined)
-            galaxies.push([m.index, lIdx]);
-    }
-});
 console.log('Result Part 1: ', calcDistances(galaxies, 1));
 console.log('Result Part 2: ', calcDistances(galaxies, 999999));
 function calcDistances(gal, f) {
