@@ -1,5 +1,4 @@
 import { readFileSync } from 'fs'
-import { start } from 'repl'
 
 /* Advent of Code 2023
 Day 12
@@ -7,8 +6,6 @@ Day 12
 
 const day = '12'
 const test: boolean = false
-// const testPart1: boolean = true
-// const testPart2: boolean = true
 
 const fileName = test ? `../testdata/${day}.txt` : `../data/${day}.txt`
 let inputLines = readFileSync(fileName).toString().split('\n')

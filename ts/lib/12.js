@@ -6,8 +6,6 @@ Day 12
 */
 const day = '12';
 const test = false;
-// const testPart1: boolean = true
-// const testPart2: boolean = true
 const fileName = test ? `../testdata/${day}.txt` : `../data/${day}.txt`;
 let inputLines = (0, fs_1.readFileSync)(fileName).toString().split('\n');
 inputLines = inputLines.map(str => (str.trim()));
