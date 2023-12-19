@@ -102,4 +102,4 @@ function solve(minStraight, maxStraight) {
     //  coloredGrid(exitNode, before)
     return bestCost;
 }
-//# sourceMappingURL=17.js.map
+//# sourceMappingURL=17.ts.orig.js.map
