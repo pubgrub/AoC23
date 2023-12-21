@@ -65,9 +65,7 @@ function solve (minStraight: number, maxStraight: number): number {
   while (queue.length > 0) {
     const thisP = queue.reduce((res, v, idx) => ((cost[res] !== undefined && cost[res] <= cost[v]) ? res : v), Infinity)
     const gridIndex = Math.floor(thisP / 4)
-
     const dir = thisP === 0 ? -Infinity : thisP - gridIndex * 4
-
     const myCost = cost[thisP]
 
     for (let d = 0; d < 4; d++) {
