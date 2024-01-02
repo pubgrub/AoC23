@@ -89,7 +89,7 @@ pointsOnLoop.forEach((point, pIdx) => {
     }
 });
 console.log('Result Part 2: ', filledPoints.length);
-// exportColored(inputLines, pointsOnLoop, filledPoints)
+exportColored(inputLines, pointsOnLoop, filledPoints);
 function fillArea(pos, filledList) {
     if (isInList(pointsOnLoop, pos))
         return;

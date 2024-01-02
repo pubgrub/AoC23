@@ -90,9 +90,10 @@ pointsOnLoop.forEach((point, pIdx) => {
     }
   }
 })
+
 console.log('Result Part 2: ', filledPoints.length)
 
-// exportColored(inputLines, pointsOnLoop, filledPoints)
+exportColored(inputLines, pointsOnLoop, filledPoints)
 
 function fillArea (pos: [number, number], filledList: Array<[number, number]>): void {
   if (isInList(pointsOnLoop, pos)) return
@@ -160,7 +161,7 @@ function getCharVal (pos: [number, number]): number {
   return -1
 }
 
-function exportColored (lines: string[], data1: Array<[number,number]>, data2: Array<[number,number]>) {
+function exportColored (lines: string[], data1: Array<[number,number]>, data2: Array<[number,number]>): void {
   const colorFileName = test ? `../testdata/${day}.txt.ans` : `../data/${day}.txt.ans`
   const bgRed = '\x1b[41m'
   const bgGreen = '\x1b[42m'
