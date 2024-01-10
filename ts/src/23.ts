@@ -5,7 +5,7 @@ Day 23
 */
 
 const day = '23'
-const test: boolean = false
+const test: boolean = true
 // const testPart1: boolean = true
 // const testPart2: boolean = true
 
@@ -31,12 +31,18 @@ inputLines.forEach((l, lIdx) => {
   })
 })
 
-const result1 = solve(start, end)
-console.log('Result Part 1: ', result1 - 1)
-// const result2 = solve2(start, end)
+interface Crossing {
+  pos: number
+  neighours: number[]
+  distances: number[]
+}
 
-// console.log('Result Part 2: ', result2 - 1)
+const crossings: Record<number, Crossing> = { start: { pos: start, neighbours: [], distances: [] } }
 
+//
+const result2 = solve2(start, end)
+
+console.log('Result Part 2: ', result2)
 
 function solve (start_: number, end_: number): number {
   return s1rec(start_, end_, [])
@@ -76,5 +82,55 @@ function s1rec (pos_: number, end_: number, seen_: number[]): number {
 }
 
 function solve2 (start: number, end: number): number {
+  // get all crossings
+  let crossing: number
+  let pathLength: number
+  [crossing, pathLength] = followPathToCrossing(start + dOffset[2], 2, [start, end])
+  return (pathLength)
 
+  const crossingsToCheck: number[] = [start, end]
+  while (crossingsToCheck.length > 0) {
+    const pos: number = crossingsToCheck[0]
+    for (let dir = 0; dir < 4; dir++) {
+      const foundCrossing: boolean = false
+      while (!foundCrossing) {
+        for (let dir = 0; dir < 4; dir++) {
+          const nextP = pos_ + dOffset[dir]
+          if (nextP < 0 || nextP > grid.length - 1) continue
+          if (grid[nextP] === -1) continue
+          possibleNextMoves.push(nextP)
+          if (possibleNextMoves.length > 1) {
+          }
+        }
+      }
+    }
+    const firstCrossing = getPathToNextCrossing(start, start, end)
+  }
+}
+
+function followPathToCrossing (pos_: number, dir_: number, startExit_: number[]): [number, number,number[]]|null {
+  let lastDir = dir_
+  let testDir = dir_
+  let pathLength = 1
+  while (true) {
+    const possibleNextMoves = []
+    const possibleNextDirs = []
+    if (startExit_.includes(pos_)) return null
+    for (let dir = 0; dir < 4; dir++) {
+      if (Math.abs(dir - lastDir) === 2) continue
+      const testP = pos_ + dOffset[dir]
+      if (testP < 0 || testP > grid.length - 1) continue
+      if (grid[testP] === -1) continue
+
+      possibleNextMoves.push(testP)
+      possibleNextDirs.push(dir)
+      testDir = dir
+      if (possibleNextMoves.length > 1) {
+        return [pos_, pathLength,possibleNextDirs]
+      }
+    }
+    pos_ = possibleNextMoves[0]
+    pathLength += 1
+    lastDir = testDir
+  }
 }

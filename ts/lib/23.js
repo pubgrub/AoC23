@@ -5,7 +5,7 @@ const fs_1 = require("fs");
 Day 23
 */
 const day = '23';
-const test = false;
+const test = true;
 // const testPart1: boolean = true
 // const testPart2: boolean = true
 const fileName = test ? `../testdata/${day}.txt` : `../data/${day}.txt`;
@@ -31,10 +31,10 @@ inputLines.forEach((l, lIdx) => {
             end = grid.length - 1;
     });
 });
-const result1 = solve(start, end);
-console.log('Result Part 1: ', result1 - 1);
-// const result2 = solve2(start, end)
-// console.log('Result Part 2: ', result2 - 1)
+const crossings = { start: { pos: start, neighbours: [], distances: [] } };
+//
+const result2 = solve2(start, end);
+console.log('Result Part 2: ', result2);
 function solve(start_, end_) {
     return s1rec(start_, end_, []);
 }
@@ -74,5 +74,59 @@ function s1rec(pos_, end_, seen_) {
     return maxSeen;
 }
 function solve2(start, end) {
+    // get all crossings
+    let crossing;
+    let pathLength;
+    [crossing, pathLength] = followPathToCrossing(start + dOffset[2], 2, [start, end]);
+    return (pathLength);
+    const crossingsToCheck = [start, end];
+    while (crossingsToCheck.length > 0) {
+        const pos = crossingsToCheck[0];
+        for (let dir = 0; dir < 4; dir++) {
+            const foundCrossing = false;
+            while (!foundCrossing) {
+                for (let dir = 0; dir < 4; dir++) {
+                    const nextP = pos_ + dOffset[dir];
+                    if (nextP < 0 || nextP > grid.length - 1)
+                        continue;
+                    if (grid[nextP] === -1)
+                        continue;
+                    possibleNextMoves.push(nextP);
+                    if (possibleNextMoves.length > 1) {
+                    }
+                }
+            }
+        }
+        const firstCrossing = getPathToNextCrossing(start, start, end);
+    }
+}
+function followPathToCrossing(pos_, dir_, startExit_) {
+    let lastDir = dir_;
+    let testDir = dir_;
+    let pathLength = 1;
+    while (true) {
+        const possibleNextMoves = [];
+        const possibleNextDirs = [];
+        if (startExit_.includes(pos_))
+            return null;
+        for (let dir = 0; dir < 4; dir++) {
+            if (Math.abs(dir - lastDir) === 2)
+                continue;
+            const testP = pos_ + dOffset[dir];
+            if (testP < 0 || testP > grid.length - 1)
+                continue;
+            if (grid[testP] === -1)
+                continue;
+            possibleNextMoves.push(testP);
+            possibleNextDirs.push(dir);
+            testDir = dir;
+            if (possibleNextMoves.length > 1) {
+                return [pos_, pathLength, possibleNextDirs];
+            }
+        }
+        pos_ = possibleNextMoves[0];
+        pathLength += 1;
+        lastDir = testDir;
+    }
 }
 //# sourceMappingURL=23.js.map
